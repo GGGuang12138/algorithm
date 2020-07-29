@@ -6,13 +6,8 @@ import sort.Sort;
  */
 public class Main {
     public static void main(String[] args){
-        Sort s = new Sort();
-        int[] data = {1,3,1,3, 2, 5,6,7,8};
-        int[] res = s.radixSort(data);
-        int count = 1;
-        for (int i : res){
-            System.out.println(i+"            "+count++);
-        }
+        IsPalindrome s = new IsPalindrome();
+        s.isPalindrome("A man, a plan, a canal: Panama");
 
     }
 

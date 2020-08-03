@@ -14,6 +14,7 @@ public class Sort {
      * 遍历整个数组，每次都把最小值放到最前面
      * 时间复杂度 O(n^2)
      * 空间复杂度 O(1)
+     *
      * @param data
      * @return int[]
      */
@@ -37,6 +38,7 @@ public class Sort {
      * 两两比较，逆序交换，比较完一轮可以确定一位
      * 时间复杂度 O(n^2) 最好情况为O(n)
      * 空间复杂度为O(1)
+     *
      * @param data
      * @return int[]
      */
@@ -59,6 +61,7 @@ public class Sort {
     /**
      * 冒泡排序优化
      * 每一趟排序，如果没有发生位置的调换，左侧小于右侧，说明已经有序
+     *
      * @param data
      * @return int[]
      */
@@ -85,8 +88,9 @@ public class Sort {
     /**
      * 插入排序
      * 遍历数组，使之从前往后有序，遍历到的数默认在当前位置，否则从后往前遍历找到合适的位置插入
-     * 时间复杂度O(n^2) 最好情况为O(1)
+     * 时间复杂度O(n^2) 最好情况为O(n)
      * 空间复杂度O(1)
+     *
      * @param data
      * @return int[]
      */
@@ -105,10 +109,11 @@ public class Sort {
     }
 
     /**
-     * 快速排序 确定标点pivot，小于pivot放在左边，大于放在右边
+     * 快速排序 确定基准pivot，小于pivot放在左边，大于放在右边
      * 左右递归直到只有一个元素
      * 由主定理可得时间复杂度为O（N*logN) 最坏情况为O(n^2)
-     * 空间复杂度为O(N*logN) 交换时需要临时变量
+     * 空间复杂度为O(logN) 交换时需要临时变量
+     *
      * @param data
      * @return
      */
@@ -122,6 +127,7 @@ public class Sort {
     /**
      * 快速排序的递归函数
      * 取r为标点，counter记录小于标点的个数，确定标点放在哪个位置
+     *
      * @param data
      * @param l
      * @param r
@@ -148,6 +154,7 @@ public class Sort {
 
     /**
      * 快速排序，支点不是特明确版
+     *
      * @param arr
      * @param L
      * @param R
@@ -223,6 +230,7 @@ public class Sort {
      * 归并排序，分治思想，将数组递归分解至只有一个元素，再merge数组
      * 时间复杂度为O（N*logN）最好最坏均同
      * 空间复杂度为O（1）
+     *
      * @param data
      * @return int[]
      */
@@ -233,6 +241,7 @@ public class Sort {
 
     /**
      * 归并排序 分治
+     *
      * @param data
      * @param l
      * @param r
@@ -247,23 +256,24 @@ public class Sort {
 
     /**
      * 归并排序 合并
+     *
      * @param data
      * @param l
      * @param mid
      * @param r
      */
     private void merge(int[] data, int l, int mid, int r) {
-        int[] temp = new int[r-l+1];
-        int i = l, j = mid+1, k=0;
+        int[] temp = new int[r - l + 1];
+        int i = l, j = mid + 1, k = 0;
         //遍历左右，放入较小着
-        while(i<=mid && j<=r) {
+        while (i <= mid && j <= r) {
             temp[k++] = data[i] <= data[j] ? data[i++] : data[j++];
         }
         while (i <= mid) temp[k++] = data[i++];
         while (j <= r) temp[k++] = data[j++];
         //添加回原数组
-        for (int p=0; p<temp.length; p++){
-            data[l+p] = temp[p];
+        for (int p = 0; p < temp.length; p++) {
+            data[l + p] = temp[p];
         }
     }
 
@@ -273,17 +283,18 @@ public class Sort {
      * 本质就是建堆、交换最大值、建堆、交换最大值、、、
      * 时间复杂度O（N*logN）
      * 空间复杂度 O（1）
+     *
      * @param data
      * @return data
      */
-    public int[] heapSort(int[] data){
-        for (int i=0; i<data.length; i++){
+    public int[] heapSort(int[] data) {
+        for (int i = 0; i < data.length; i++) {
             // 建堆
-            maxHeapify(data,data.length-i);
+            maxHeapify(data, data.length - i);
             // 交换
             int temp = data[0];
-            data[0] = data[data.length-1-i];
-            data[data.length-1-i] = temp;
+            data[0] = data[data.length - 1 - i];
+            data[data.length - 1 - i] = temp;
         }
         return data;
     }
@@ -292,8 +303,8 @@ public class Sort {
      * 建堆，从数组最后往前建
      */
     private void maxHeapify(int[] data, int size) {
-        for (int i=size-1; i>=0; i--){
-            heapify(data,i,size);
+        for (int i = size - 1; i >= 0; i--) {
+            heapify(data, i, size);
         }
     }
 
@@ -304,13 +315,13 @@ public class Sort {
         int l = 2 * curr + 1;
         int r = 2 * curr + 2;
         int max = curr;
-        if (l < size){
+        if (l < size) {
             if (data[max] < data[l]) max = l;
         }
-        if (r < size){
+        if (r < size) {
             if (data[max] < data[r]) max = r;
         }
-        if (max != curr){
+        if (max != curr) {
             int temp = data[max];
             data[max] = data[curr];
             data[curr] = temp;
@@ -324,20 +335,21 @@ public class Sort {
      * 分组间隔逐渐缩小直到1个元素一组，即为插入排序
      * 时间复杂度 O(n^1.3)
      * 空间复杂度O（1）
+     *
      * @param data
      * @return
      */
-    public int[] shellSort(int[] data){
+    public int[] shellSort(int[] data) {
         //  希尔增量一般为gap = length/2
-        for (int gap=data.length>>1; gap>0; gap/=2){
+        for (int gap = data.length >> 1; gap > 0; gap /= 2) {
             //从/2那一组开始插入排序
-            for (int i=gap; i<data.length; i++){
+            for (int i = gap; i < data.length; i++) {
                 int j = i;
                 int temp = data[j];
                 //相差gap为同一组
-                while (j-gap >= 0 && data[j-gap]>temp){
-                    data[j] = data[j-gap];
-                    j = j-gap;
+                while (j - gap >= 0 && data[j - gap] > temp) {
+                    data[j] = data[j - gap];
+                    j = j - gap;
                 }
                 data[j] = temp;
             }
@@ -351,23 +363,24 @@ public class Sort {
      * 时间复杂度为O（n）或 最大值的位数*（桶+n）
      * 空间复杂度同
      * 基数排序 = 基数+桶排序(需要桶内排序) = 基数+函数映射+计数排序（数组够大，包括全部数）
+     *
      * @param data
      * @return
      */
-    public int[] radixSort(int[] data){
+    public int[] radixSort(int[] data) {
         //计算最大值
-        int max = findMax(data,0,data.length-1);
+        int max = findMax(data, 0, data.length - 1);
         //根据最大值的位数进行循环，必须从每个数到个位数开始
-        for (int i=1; max/i > 0; i = i*10){
+        for (int i = 1; max / i > 0; i = i * 10) {
             int[][] bucket = new int[data.length][10];
             //将数放假桶里
-            for(int j=0; j<data.length; j++){
-                bucket[j][(data[j]/i)%10] = data[j];
+            for (int j = 0; j < data.length; j++) {
+                bucket[j][(data[j] / i) % 10] = data[j];
             }
             //从桶取出
             int k = 0;
-            for (int j=0; j<10; j++){
-                for (int l=0; l < data.length; l++){
+            for (int j = 0; j < 10; j++) {
+                for (int l = 0; l < data.length; l++) {
                     if (bucket[l][j] != 0) data[k++] = bucket[l][j];
                 }
             }
@@ -379,9 +392,9 @@ public class Sort {
      * 递归找最大值
      */
     private int findMax(int[] data, int l, int r) {
-        if (l==r) return data[l];
+        if (l == r) return data[l];
         int a = data[l];
-        int b = findMax(data,l+1,r);
+        int b = findMax(data, l + 1, r);
         return Math.max(a, b);
     }
 }

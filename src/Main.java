@@ -1,4 +1,5 @@
 import sort.Sort;
+import sort.Sort1;
 
 /**
  * Creat by GG
@@ -6,8 +7,12 @@ import sort.Sort;
  */
 public class Main {
     public static void main(String[] args){
-        IsPalindrome s = new IsPalindrome();
-        s.isPalindrome("A man, a plan, a canal: Panama");
+        Sort1 s = new Sort1();
+        int[] data = {5,1,1,2,0,0};
+        int[] arr = s.quickSort(data);
+        for (int i= 0; i<data.length; i++){
+            System.out.println(arr[i]);
+        }
 
     }
 
